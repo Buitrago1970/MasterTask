@@ -1,54 +1,124 @@
-# React + TypeScript + Vite
+# TaskMaster Front-End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TaskMaster is a task management application that allows users to create, view, edit, delete, and filter tasks with an intuitive and responsive interface.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Installation & Getting Started](#installation--getting-started)
+- [Port Configuration](#port-configuration)
+- [Technical Decisions & Trade-offs](#technical-decisions--trade-offs)
+- [Future Improvements](#future-improvements)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Task display**: shows title, priority (Low, Medium, High), due date, and completion status.
+- **Full task management**: create, edit, delete, and mark tasks as complete/incomplete.
+- **Filtering**: by status (completed/incomplete) and priority.
+- **Modern, responsive UI**: adapts to mobile, tablet, and desktop.
+- **Form validation** and visual feedback for actions and loading states.
+- **Visual indicators**: color-coded priorities and clear completion status.
+- **RESTful API consumption**: integrates with a Node.js/Express backend (default: `http://localhost:3001`).
+
+---
+
+## Project Structure
+
+```
+front/
+├── src/
+│   ├── components/      # UI components: TaskList, TaskForm, TaskFilter, ConfirmDeleteModal
+│   ├── context/         # Global state management (TaskContext)
+│   ├── hooks/           # Custom hooks (e.g., media query usage)
+│   ├── types/           # TypeScript types for tasks
+│   ├── assets/          # Static assets
+│   ├── App.tsx          # Root component
+│   └── main.tsx         # Entry point
+├── public/              # Public static files
+├── tailwind.config.js   # TailwindCSS configuration
+├── package.json         # Dependencies and scripts
+└── ...
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Main Components
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **TaskList**: lists and filters tasks, allows editing and deleting.
+- **TaskForm**: form for creating/editing tasks, with validation.
+- **TaskFilter**: filter bar by priority and status.
+- **ConfirmDeleteModal**: confirmation dialog for deleting tasks.
+- **TaskContext**: manages global state and API communication.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## Installation & Getting Started
+
+### Prerequisites
+
+- Node.js >= 18.x
+- npm >= 9.x
+
+### Steps
+
+1. **Install dependencies**
+
+   ```bash
+   cd front
+   npm install
+   ```
+
+2. **Run in development mode**
+
+   ```bash
+   npm run dev
+   ```
+
+   By default, the app runs at [http://localhost:5173](http://localhost:5173).
+
+3. **Production build**
+
+   ```bash
+   npm run build
+   ```
+
+4. **Preview production build**
+
+   ```bash
+   npm run preview
+   ```
+
+---
+
+## Port Configuration
+
+- **Front-end**: Vite runs by default on port **5173**.
+- **Back-end**: The front-end expects the API to be available at `http://localhost:3001/api/tasks`.
+  - You can change the backend URL in `src/context/TaskContext.tsx` if needed.
+
+---
+
+## Technical Decisions & Trade-offs
+
+- **React + Vite + TypeScript**: for fast development, strict typing, and a modern stack.
+- **TailwindCSS**: for rapid, responsive, and consistent styling.
+- **Context API**: global state management for tasks, ideal for this app size.
+- **Simple validation**: basic form validation, sufficient for the challenge.
+- **No routing**: single-page app, as complexity does not require multiple routes.
+- **Direct fetch usage**: fetch is used for API calls, though axios is included for possible future improvements.
+
+---
+
+## Future Improvements
+
+- **Add unit and integration tests** (e.g., with React Testing Library).
+- **Internationalization (i18n)**.
+- **Better error handling and user feedback**.
+- **Pagination or search for large task lists**.
+- **Offline persistence/localStorage**.
+- **Accessibility (a11y) improvements**.
+- **More advanced animations and microinteractions**.
+- **Multi-user/authentication support**.
+
+---

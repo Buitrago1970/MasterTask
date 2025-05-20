@@ -1,6 +1,34 @@
 # TaskMaster Backend API
 
-This is the backend API for the TaskMaster application. It provides endpoints to manage tasks in memory.
+TaskMaster Backend is the API that manages tasks for the TaskMaster application. It allows you to create, read, update, and delete tasks (CRUD) using REST endpoints. Tasks are stored in memory (no database is used).
+
+## Technologies and Dependencies
+
+- **Node.js**: JavaScript runtime environment for the backend.
+- **Express**: Framework to create the REST API.
+- **CORS**: Middleware to enable requests from other origins (useful for the frontend).
+- **UUID**: To generate unique identifiers for each task.
+- **Nodemon** (development only): Automatically restarts the server when file changes are detected.
+
+## Installation and Running
+
+1. Make sure you have **Node.js** installed.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. For development (with auto-reload):
+   ```bash
+   npm run dev
+   ```
+   For production:
+   ```bash
+   npm start
+   ```
+
+## Running Port
+
+The backend runs by default on port **3001** (`http://localhost:3001`). You can change it using the `PORT` environment variable.
 
 ## Base URL
 
